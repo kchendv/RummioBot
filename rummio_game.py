@@ -47,3 +47,10 @@ class RummioGame():
     def reset(self):
         reset_button = self.driver.find_element(By.XPATH, '//div[text()="restart"]')
         reset_button.click()
+
+    def __enter__(self):
+        return self.driver
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        # Ensure driver is destroyed
+        self.driver.quit()

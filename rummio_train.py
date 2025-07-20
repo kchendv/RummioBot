@@ -10,8 +10,8 @@ def train_sb3():
     log_dir = "logs"
     os.makedirs(model_dir, exist_ok=True)
     os.makedirs(log_dir, exist_ok=True)
-    env = make_vec_env("rummio", n_envs=4, vec_env_cls=SubprocVecEnv)
-    model = PPO('MlpPolicy', env, verbose = 1, device='cpu', tensorboard_log=log_dir, n_steps= 256)
+    env = make_vec_env("rummio", n_envs=8, vec_env_cls=SubprocVecEnv)
+    model = PPO('MlpPolicy', env, verbose = 1, device='cpu', tensorboard_log=log_dir, n_steps=256)
 
     TIMESTEPS = 1000
     iters = 0
