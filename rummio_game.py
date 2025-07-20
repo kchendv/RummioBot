@@ -17,9 +17,6 @@ class RummioGame():
         # Load the page
         self.driver.get(file_url)
 
-        # Wait for page to load content
-        time.sleep(3)  # Increase if needed
-
 
         # The browser stays open
 
