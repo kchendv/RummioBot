@@ -1,7 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
-import time
+import time, os
 
 class RummioGame():
     def __init__(self):
@@ -12,8 +12,10 @@ class RummioGame():
         # Create WebDriver (Make sure chromedriver is in your PATH or specify the full path)
         self.driver = webdriver.Chrome(service=Service(), options=options)
 
+        file_path = os.path.abspath("rumm.io.html")
+        file_url = f"file://{file_path}"
         # Load the page
-        self.driver.get("https://rumm.io")
+        self.driver.get(file_url)
 
         # Wait for page to load content
         time.sleep(3)  # Increase if needed
