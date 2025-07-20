@@ -1,7 +1,8 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
-import time, os
+import os
+import numpy as np
 
 class RummioGame():
     def __init__(self):
@@ -30,15 +31,12 @@ class RummioGame():
             match = class_attr.split(" ")
             values.append(int(match[-1][1:]))
 
-
         input_cell = self.driver.find_elements(By.XPATH, '//div[@id="next"]//div')
         class_attr = input_cell[0].get_attribute("class")
         match = class_attr.split(" ")
         values.append(int(match[-1][1:]))
-        return values
-    
-    def is_game_end(self, values):
-        return not(0 in values)
+        one_hot_values = np.eye(12, dtype=np.int32)[values].flatten()
+        return one_hot_values, not(0 in values)
     
     def do_click(self, index):
         grid_cells = self.driver.find_elements(By.XPATH, '//div[@class="grid"]//div[@class="row"]//div//div')
