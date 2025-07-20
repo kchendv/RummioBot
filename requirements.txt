@@ -1,0 +1,4 @@
+selenium
+gymnasium
+numpy
+stable-baselines3[extra]
