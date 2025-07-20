@@ -3,13 +3,14 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 import os
 import numpy as np
+from selenium.webdriver.support.ui import WebDriverWait
 
 class RummioGame():
     def __init__(self):
         # Setup Chrome options
         options = webdriver.ChromeOptions()
         options.add_argument("--start-maximized")  # Optional: Start with a maximized window
-
+        options.add_argument("--log-level=3")  # Supress deprecated endpoints
         # Create WebDriver (Make sure chromedriver is in your PATH or specify the full path)
         self.driver = webdriver.Chrome(service=Service(), options=options)
 
@@ -35,7 +36,7 @@ class RummioGame():
         class_attr = input_cell[0].get_attribute("class")
         match = class_attr.split(" ")
         values.append(int(match[-1][1:]))
-        one_hot_values = np.eye(12, dtype=np.int32)[values].flatten()
+        one_hot_values = np.eye(12, dtype=np.int32)[[(v if v < 12 else 0) for v in values]].flatten()
         return one_hot_values, not(0 in values)
     
     def do_click(self, index):
