@@ -23,7 +23,7 @@ def train_sb3():
 def test_sb3(model_n = 2, render=True):
     env = gym.make('rummio', render_mode='human' if render else None)
 
-    model = A2C.load(f'models/ppo_{model_n}', env=env)
+    model = PPO.load(f'models/ppo_{model_n}', env=env)
 
     obs = env.reset()[0]
     terminated = False
